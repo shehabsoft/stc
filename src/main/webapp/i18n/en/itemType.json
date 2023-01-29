@@ -1,0 +1,10 @@
+{
+  "filemanagerServiceApp": {
+    "ItemType": {
+      "null": "",
+      "SPACE": "SPACE",
+      "FOLDER": "FOLDER",
+      "FILE": "FILE"
+    }
+  }
+}

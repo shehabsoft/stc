@@ -1,0 +1,10 @@
+{
+  "filemanagerServiceApp": {
+    "PermissionLevel": {
+      "null": "",
+      "VIEW": "VIEW",
+      "EDIT": "EDIT",
+      "DOWNLOAD": "DOWNLOAD"
+    }
+  }
+}

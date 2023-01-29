@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="item">
+      <h2 data-cy="itemDetailsHeading"><span jhiTranslate="filemanagerServiceApp.item.detail.title">Item</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ item.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanagerServiceApp.item.type">Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'filemanagerServiceApp.ItemType.' + item.type }}">{{ item.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanagerServiceApp.item.name">Name</span></dt>
+        <dd>
+          <span>{{ item.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanagerServiceApp.item.permissionUsersGroup">Permission Users Group</span></dt>
+        <dd>
+          <div *ngIf="item.permissionUsersGroup">
+            <a [routerLink]="['/permission-users-group', item.permissionUsersGroup.id, 'view']">{{ item.permissionUsersGroup.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/item', item.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

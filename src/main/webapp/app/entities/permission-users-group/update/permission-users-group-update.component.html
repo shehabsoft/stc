@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-permission-users-group-heading"
+        data-cy="PermissionUsersGroupCreateUpdateHeading"
+        jhiTranslate="filemanagerServiceApp.permissionUsersGroup.home.createOrEditLabel"
+      >
+        Create or edit a Permission Users Group
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="filemanagerServiceApp.permissionUsersGroup.userEmail" for="field_userEmail"
+            >User Email</label
+          >
+          <input type="text" class="form-control" name="userEmail" id="field_userEmail" data-cy="userEmail" formControlName="userEmail" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="filemanagerServiceApp.permissionUsersGroup.permissionLevel" for="field_permissionLevel"
+            >Permission Level</label
+          >
+          <select
+            class="form-control"
+            name="permissionLevel"
+            formControlName="permissionLevel"
+            id="field_permissionLevel"
+            data-cy="permissionLevel"
+          >
+            <option [ngValue]="null">{{ 'filemanagerServiceApp.PermissionLevel.null' | translate }}</option>
+            <option *ngFor="let permissionLevel of permissionLevelValues" [value]="permissionLevel">
+              {{ 'filemanagerServiceApp.PermissionLevel.' + permissionLevel | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="filemanagerServiceApp.permissionUsersGroup.permissionGroup" for="field_permissionGroup"
+            >Permission Group</label
+          >
+          <select
+            class="form-control"
+            id="field_permissionGroup"
+            data-cy="permissionGroup"
+            name="permissionGroup"
+            formControlName="permissionGroup"
+            [compareWith]="comparePermissionGroups"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="permissionGroupsOption" *ngFor="let permissionGroupsOption of permissionGroupsSharedCollection">
+              {{ permissionGroupsOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="permissionUsersGroup">
+      <h2 data-cy="permissionUsersGroupDetailsHeading">
+        <span jhiTranslate="filemanagerServiceApp.permissionUsersGroup.detail.title">Permission Users Group</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ permissionUsersGroup.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanagerServiceApp.permissionUsersGroup.userEmail">User Email</span></dt>
+        <dd>
+          <span>{{ permissionUsersGroup.userEmail }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanagerServiceApp.permissionUsersGroup.permissionLevel">Permission Level</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'filemanagerServiceApp.PermissionLevel.' + permissionUsersGroup.permissionLevel }}">{{
+            permissionUsersGroup.permissionLevel
+          }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanagerServiceApp.permissionUsersGroup.permissionGroup">Permission Group</span></dt>
+        <dd>
+          <div *ngIf="permissionUsersGroup.permissionGroup">
+            <a [routerLink]="['/permission-groups', permissionUsersGroup.permissionGroup.id, 'view']">{{
+              permissionUsersGroup.permissionGroup.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/permission-users-group', permissionUsersGroup.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "filemanagerServiceApp": {
+    "permissionGroups": {
+      "home": {
+        "title": "Permission Groups",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Permission Groups",
+        "createOrEditLabel": "Create or edit a Permission Groups",
+        "notFound": "No Permission Groups found"
+      },
+      "created": "A new Permission Groups is created with identifier {{ param }}",
+      "updated": "A Permission Groups is updated with identifier {{ param }}",
+      "deleted": "A Permission Groups is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Permission Groups {{ id }}?"
+      },
+      "detail": {
+        "title": "Permission Groups"
+      },
+      "id": "ID",
+      "groupName": "Group Name",
+      "permissionUsersGroup": "Permission Users Group"
+    }
+  }
+}

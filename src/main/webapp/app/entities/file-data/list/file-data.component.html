@@ -1,0 +1,104 @@
+<div>
+  <h2 id="page-heading" data-cy="FileDataHeading">
+    <span jhiTranslate="filemanagerServiceApp.fileData.home.title">File Data</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="filemanagerServiceApp.fileData.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-file-data"
+        [routerLink]="['/file-data/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="filemanagerServiceApp.fileData.home.createLabel"> Create a new File Data </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="fileData?.length === 0">
+    <span jhiTranslate="filemanagerServiceApp.fileData.home.notFound">No File Data found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="fileData && fileData.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="binery">
+            <div class="d-flex">
+              <span jhiTranslate="filemanagerServiceApp.fileData.binery">Binery</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="item.id">
+            <div class="d-flex">
+              <span jhiTranslate="filemanagerServiceApp.fileData.item">Item</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fileData of fileData; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/file-data', fileData.id, 'view']">{{ fileData.id }}</a>
+          </td>
+          <td>
+            <a *ngIf="fileData.binery" (click)="openFile(fileData.binery, fileData.bineryContentType)" jhiTranslate="entity.action.open"
+              >Open</a
+            >
+            <span *ngIf="fileData.binery">{{ fileData.bineryContentType }}, {{ byteSize(fileData.binery) }}</span>
+          </td>
+          <td>
+            <div *ngIf="fileData.item">
+              <a [routerLink]="['/item', fileData.item.id, 'view']">{{ fileData.item.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/file-data', fileData.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/file-data', fileData.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(fileData)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="fileData">
+      <h2 data-cy="fileDataDetailsHeading"><span jhiTranslate="filemanagerServiceApp.fileData.detail.title">File Data</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ fileData.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="filemanagerServiceApp.fileData.binery">Binery</span></dt>
+        <dd>
+          <div *ngIf="fileData.binery">
+            <a (click)="openFile(fileData.binery, fileData.bineryContentType)" jhiTranslate="entity.action.open">Open</a>
+            {{ fileData.bineryContentType }}, {{ byteSize(fileData.binery) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="filemanagerServiceApp.fileData.item">Item</span></dt>
+        <dd>
+          <div *ngIf="fileData.item">
+            <a [routerLink]="['/item', fileData.item.id, 'view']">{{ fileData.item.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/file-data', fileData.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
