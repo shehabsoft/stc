@@ -22,5 +22,5 @@ public interface FileDataRepository extends JpaRepository<FileData, Long> {
             "         and pug.user_email= :emailAddress \n" +
             "         and i.name= :fileName ",
         nativeQuery = true)
-    Optional<FileData> findfileByCriticia(@Param("emailAddress") String emailAddress, @Param("fileName") String fileName);
+     Optional<FileData> findfileByCriticia(@Param("name") String name, @Param("userEmail") String userEmail);
 }
