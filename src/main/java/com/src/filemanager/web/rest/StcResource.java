@@ -78,6 +78,21 @@ public class StcResource {
             .headers(HeaderUtil.createEntityCreationAlert(fileDataDTO.getItem().getName(), true, ENTITY_NAME, fileDataDTO.getId().toString()))
             .body(fileDataDTO);
     }
+	
+	@GetMapping("/file-data/downolad/{fileName}/userEmail/{userEmail}")
+    public ResponseEntity<byte[]> downloadFileData(@PathVariable String fileName,@PathVariable String userEmail) throws URISyntaxException {
+
+        FileDataDTO fileDataDTO = null;
+        try {
+            fileDataDTO = permission.getFile(fileName,userEmail);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+            .body(fileDataDTO.getBinery());
+    }
 
 
 }
